@@ -839,7 +839,7 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  padding: 20px 10px;
+  padding: 20px 10px; /* Mantiene tus 10px originales para cuidar el logo */
   height: 100vh;
   position: sticky;
   top: 0;
@@ -847,6 +847,7 @@ body {
   overflow: hidden;
   z-index: 100;
 }
+
 .sidebar:hover {
   width: 260px;
 }
@@ -857,96 +858,117 @@ body {
   gap: 15px;
   margin-bottom: 30px;
   white-space: nowrap;
+  width: 100%;
 }
+
 .logo-icon {
-  min-width: 50px;
+  min-width: 50px; 
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .sidebar-header span,
-.sidebar-menu li span,
+.sidebar-menu li span:not(.icon-box),
 .user-info {
   opacity: 0;
   transition: opacity 0.2s;
   white-space: nowrap;
 }
+
 .sidebar:hover .sidebar-header span,
-.sidebar:hover .sidebar-menu li span,
+.sidebar:hover .sidebar-menu li span:not(.icon-box),
 .sidebar:hover .user-info {
   opacity: 1;
 }
 
 .sidebar-menu {
   flex: 1;
+  width: 100%;
 }
+
 .sidebar-menu ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 .sidebar-menu li {
-    display: flex;
-    align-items: center;
-    padding: 8px 15px; 
-    gap: 15px;
-    cursor: pointer;
-    transition: background 0.3s;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s, padding 0.3s ease;
+  overflow: hidden;
+  width: 100%;
+  
+  justify-content: flex-start;
+  padding: 8px 15px; 
+  gap: 15px;
 }
+
 .sidebar-menu li:hover,
 .sidebar-menu li.active {
-    background-color: transparent !important; 
+  background-color: transparent !important; 
 }
+
 .sidebar-menu li .arrow {
   margin-left: auto;
 }
 
 .icon-box {
-    width: 45px; 
-    height: 45px;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    border-radius: 12px;
-    flex-shrink: 0; 
-    transition: background-color 0.3s ease;
+  width: 45px; 
+  height: 45px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  border-radius: 12px;
+  flex-shrink: 0; 
+  transition: background-color 0.3s ease;
 }
 
+.sidebar-menu li span.icon-box {
+  opacity: 1 !important;
+}
 
 .sidebar-menu li:hover .icon-box {
-    background-color: rgba(138, 38, 38, 0.4);
+  background-color: rgba(138, 38, 38, 0.4);
 }
 
-
 .sidebar-menu li.active .icon-box {
-    background-color: rgba(138, 38, 38, 0.8); /* Rojo vino más fuerte */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Toque de sombra */
+  background-color: rgba(138, 38, 38, 0.8);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .icon-box i,
-.icon-box svg {
-    width: 22px !important; 
-    height: 22px !important;
-    color: #ffffff; 
-}
-
-.sidebar-menu li span:not(.icon-box) {
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.sidebar:hover .sidebar-menu li span:not(.icon-box) {
-    opacity: 1;
-}
-
+.icon-box svg,
 .sidebar-menu li i, 
 .sidebar-menu li svg {
-    min-width: 20px;
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0; 
-    color: #ffffff;
+  width: 22px !important; 
+  height: 22px !important;
+  min-width: 22px !important;
+  color: #ffffff !important;
+  display: block !important;
+  flex-shrink: 0 !important;
 }
+
+.sidebar:not(:hover) .sidebar-menu li {
+  position: relative !important; 
+  height: 50px !important;    
+  padding: 0 !important;         
+  margin-bottom: 5px !important;  
+}
+
+.sidebar:not(:hover) .icon-box {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  width: 45px !important;
+  height: 45px !important;
+}
+
+/* Pie de página */
 .sidebar-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 20px;
@@ -1077,120 +1099,486 @@ body {
   border-left: 5px solid #ffb0b0;
 }
 
-/* --- CONTENEDOR DE LA BANDEJA (Solo lista) --- */
 .inbox-container {
-    display: block; /* Cambiado de flex/grid a block para que ocupe todo el ancho */
-    width: 100%;
-    background: white;
+    display: block !important;
+    width: 100% !important;
+    background: #ffffff;
     border-radius: 12px;
-    overflow: hidden;
-    max-height: 500px; /* Ajusta según prefieras */
-    overflow-y: auto;
-    border: 1px solid #eee;
+    border: 1px solid #f0f0f0;
+    margin-top: 15px;
+    box-sizing: border-box;
 }
 
 .inbox-list {
-    width: 100% !important; /* Forzamos a que ocupe todo el ancho de la tarjeta */
+    width: 100% !important;
 }
 
-.inbox-item {
-    padding: 20px;
-    border-bottom: 1px solid #f0f0f0;
+.inbox-item-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f7f7f7;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.2s ease;
 }
 
-.inbox-item:hover { 
-    background: #fff5f5; 
+.inbox-item-row:hover {
+    background: #fff5f5;
 }
 
-.inbox-item h4 { 
-    font-size: 1rem; 
-    color: #722f37; 
-    margin-bottom: 5px; 
+.inbox-item-content {
+    flex-grow: 1;
+    text-align: left; 
 }
 
-.inbox-item p { 
-    font-size: 0.85rem; 
-    color: #666; 
+.inbox-item-content h4 {
+    margin: 0 0 4px 0 !important;
+    color: #722f37;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
-/* --- VENTANA EMERGENTE (MODAL) --- */
-.modal {
-    display: none; /* Se activa con JS */
-    position: fixed; 
-    z-index: 9999; /* Por encima de todo */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro */
-    backdrop-filter: blur(4px); /* Difumina el dashboard de fondo */
+.inbox-item-content p {
+    margin: 0 !important;
+    color: #666;
+    font-size: 0.85rem;
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 550px;
-    position: relative;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    animation: slideDown 0.3s ease-out;
+.btn-delete-msg {
+    background: none !important;
+    border: none !important;
+    color: #cc3333 !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease !important;
+    margin-left: 15px;
 }
 
-@keyframes slideDown {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.btn-delete-msg:hover {
+    transform: scale(1.2);
+    color: #ff0000 !important;
 }
 
-.close-modal {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #999;
+.modal-confirm-content {
+    max-width: 400px;
+    text-align: center;
+}
+.inbox-item-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
     cursor: pointer;
+    text-align: left;
 }
 
-.close-modal:hover {
+.inbox-item-content {
+    flex-grow: 1;
+}
+
+.inbox-item-content h4 {
+    margin: 0; 
     color: #722f37;
 }
 
-/* Ocultar la vista previa vieja si existiera */
-.inbox-view {
-    display: none !important;
+.inbox-item-content p {
+    margin: 5px 0 0; 
+    color: #666;
 }
 
-/* Estilo para que los iconos tengan tamaño y color */
-/* Esto le da tamaño y visibilidad a todos los iconos de la página */
-i[data-lucide], .lucide {
-    width: 24px !important;
-    height: 24px !important;
-    display: inline-block;
-    stroke: currentColor; /* Para que herede el color del texto */
-    stroke-width: 2;
-    fill: none;
+.btn-delete-msg {
+    background: none !important;
+    border: none !important;
+    color: #cc3333 !important;
+    cursor: pointer !important;
+    padding: 10px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* Color específico para tus iconos de Sabores del Vino */
-.icon-box i, .card-pro i {
-    color: #722f37; /* El color uva/vino */
+.btn-delete-msg:hover {
+    transform: scale(1.15);
+    color: #ff0000 !important;
 }
 
-/* Forzar visibilidad de iconos Lucide */
-svg.lucide, [data-lucide] {
-    width: 24px !important;
-    height: 24px !important;
-    display: inline-block !important;
-    visibility: visible !important;
-    stroke: #722f37 !important; /* Color vino para que resalten */
-    stroke-width: 2px;
+.inbox-empty-text {
+    padding: 20px;
+    text-align: center;
+    color: #888;
 }
 
-/* Si están dentro del sidebar oscuro, que sean blancos */
-.sidebar svg.lucide {
-    stroke: #ffffff !important;
+.modal-visor, .modal-alerta {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.5) !important; 
+    z-index: 99999 !important; 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-visor .modal-content, .modal-alerta .modal-content {
+    background-color: #ffffff !important;
+    margin: 15% auto !important;
+    padding: 25px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    position: relative !important;
+}
+
+.modal-visor .modal-content {
+    max-width: 600px !important;
+    width: 90% !important;
+}
+
+.modal-alerta .modal-content {
+    max-width: 400px !important;
+    width: 85% !important;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 12% auto;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+
+.modal-confirm-box {
+    max-width: 400px;
+}
+.modal-header-vinotinto {
+    background-color: #4a121a; 
+    padding: 12px 20px;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+.close-modal {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: opacity 0.2s;
+}
+
+.close-modal:hover {
+    opacity: 0.7;
+}
+.modal-body-padding {
+    padding: 25px 30px;
+    color: #333333;
+}
+
+.modal-body-padding h2 {
+    color: #4a121a;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.modal-body-padding p {
+    margin: 6px 0;
+    font-size: 0.95rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center h3 {
+    color: #4a121a;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.text-center p {
+    color: #666666;
+    margin-bottom: 25px;
+}
+.modal-confirm-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-cancelar {
+    padding: 10px 22px;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333333;
+    font-size: 0.9rem;
+}
+
+.btn-confirmar {
+    padding: 10px 22px;
+    background-color: #4a121a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.btn-cancelar:hover, .btn-confirmar:hover {
+    opacity: 0.9;
+}
+.user-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.user-item-content {
+    flex-grow: 1;
+}
+
+.user-item-content h4 {
+    margin: 0;
+    color: #4a121a; /* Tu color vino original */
+}
+
+.user-item-content p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+.user-empty-text {
+    padding: 20px;
+    text-align: center;
+    color: #888;
+}
+
+.dashboard-section {
+    display: none; 
+}
+
+.seccion-active {
+    display: block !important; 
+}
+
+.section-container-padding {
+    padding: 25px 30px;
+}
+
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-title-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-vinotinto {
+    color: #4a121a;
+    font-size: 20px;
+}
+
+.title-vinotinto {
+    margin: 0;
+    color: #4a121a;
+    font-weight: bold;
+}
+
+.counter-text {
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.list-cards-wrapper {
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    background-color: #ffffff;
+    min-height: 80px;
+}
+
+.user-item-row {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.user-item-row:last-child {
+    border-bottom: none;
+}
+
+.user-card-title {
+    margin: 0;
+    color: #4a121a;
+    font-weight: bold;
+}
+
+.user-card-email {
+    margin: 5px 0 0;
+    color: #666666;
+    font-size: 0.9rem;
+}
+
+.user-empty-text {
+    padding: 20px;
+    text-align: center;
+    color: #888888;
+}
+
+.modal-active {
+    display: block !important;
+}
+
+.seccion-active {
+    display: block !important;
+}
+
+#seccion-usuarios {
+    display: block !important;
+    background: white;
+    min-height: 200px;
+    width: 100%;
+}
+
+.dashboard-toggle-section {
+  display: none;
+  margin-bottom: 30px;
+}
+
+.full-width-grid {
+  grid-column: 1 / -1;
+}
+
+.full-width-list {
+  width: 100%;
+}
+.icon-vinotinto-header {
+  color: #722f37;
+}
+
+.dashboard-toggle-section {
+  display: none;
+  margin-bottom: 30px;
+}
+
+.dashboard-toggle-section.is-visible {
+  display: block;
+}
+.full-width-grid {
+  grid-column: 1 / -1;
+}
+
+.full-width-list {
+  width: 100%;
+}
+
+.icon-vinotinto-header {
+  color: #722f37;
+}
+
+.modal.is-visible {
+  display: block;
+}
+
+.dashboard-toggle-section {
+  display: none !important;
+  margin-bottom: 30px;
+}
+
+.dashboard-toggle-section.is-visible {
+  display: block !important;
+}
+
+.details-grid {
+    display: grid;
+}
+
+section.dashboard-toggle-section {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin-bottom: 0 !important;
+}
+
+section.dashboard-toggle-section.is-visible {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  margin-bottom: 30px !important;
+}
+.card-data * {
+  pointer-events: none !important;
+}
+
+section.dashboard-toggle-section {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+section.dashboard-toggle-section.is-visible {
+  display: grid !important; 
+  height: auto !important;
+  min-height: auto !important;
+  margin-bottom: 30px !important;
+}
+
+.card-data {
+  cursor: pointer !important;
+  background-clip: padding-box !important;
+  user-select: none !important;
+}
+
+.card-data::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+}
+.card-data {
+  position: relative !important;
 }

@@ -1,148 +1,239 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png"
+    />
     <title>Sabores del Vino - Dashboard Admin</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="layout">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-icon">
-                    <img src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" alt="Logo" style="width: 40px; height: auto" />
-                </div>
-                <span>Sabores del vino</span>
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-icon">
+            <img
+              src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png"
+              alt="Logo"
+              style="width: 40px; height: auto"
+            />
+          </div>
+          <span>Sabores del vino</span>
+        </div>
+
+        <nav class="sidebar-menu">
+          <ul>
+            <li class="active">
+              <span class="icon-box"><i data-lucide="home"></i></span>
+              <span>Inicio</span>
+            </li>
+            <li class="active">
+              <span class="icon-box"><i data-lucide="layers"></i></span>
+              <span>Contenido</span>
+            </li>
+            <li id="sidebar-btn-usuarios" style="cursor: pointer">
+              <span class="icon-box"><i data-lucide="users"></i></span>
+              <span>Usuarios</span>
+            </li>
+            <li>
+              <span class="icon-box"><i data-lucide="bar-chart-2"></i></span>
+              <span>Analíticas</span>
+            </li>
+            <li id="sidebar-btn-mensajes" style="cursor: pointer">
+              <span class="icon-box"><i data-lucide="mail"></i></span>
+              <span>Mensajes</span>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-info">
+            <span class="name" id="sidebar-nombre">Cargando...</span>
+            <span class="role">Administrador</span>
+          </div>
+          <button class="btn-logout" id="btn-logout">
+            <i data-lucide="log-out"></i>
+          </button>
+        </div>
+      </aside>
+
+      <main class="Content">
+        <header class="main-header">
+          <h1 id="user-title">Bienvenido, Admin</h1>
+          <p>Gestión y estadísticas de tu tienda de vinos</p>
+        </header>
+
+        <section class="cards-grid">
+          <div class="card-pro v-vino" style="cursor: pointer">
+            <div class="card-data">
+              <span>USUARIOS</span>
+              <h2 id="count-usuarios">0</h2>
             </div>
-
-            <nav class="sidebar-menu">
-                <ul>
-                    <li class="active">
-                        <span class="icon-box"><i data-lucide="home"></i></span>
-                        <span>Inicio</span>
-                    </li>
-                    <li>
-                        <span class="icon-box"><i data-lucide="layers"></i></span>
-                        <span>Contenido</span>
-                    </li>
-                    <li>
-                        <span class="icon-box"><i data-lucide="users"></i></span>
-                        <span>Usuarios</span>
-                    </li>
-                    <li>
-                        <span class="icon-box"><i data-lucide="bar-chart-2"></i></span>
-                        <span>Analíticas</span>
-                    </li>
-                    <li id="sidebar-btn-mensajes" style="cursor: pointer">
-                        <span class="icon-box"><i data-lucide="mail"></i></span>
-                        <span>Mensajes</span>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="user-info">
-                    <span class="name" id="sidebar-nombre">Cargando...</span>
-                    <span class="role">Administrador</span>
-                </div>
-                <button class="btn-logout" id="btn-logout">
-                    <i data-lucide="log-out"></i>
-                </button>
+            <i data-lucide="users"></i>
+          </div>
+          <div class="card-pro v-uva">
+            <div class="card-data">
+              <span>PRODUCTOS</span>
+              <h2 id="count-productos">0</h2>
             </div>
-        </aside>
+            <i data-lucide="package"></i>
+          </div>
+          <div class="card-pro v-rosado">
+            <div class="card-data">
+              <span>PEDIDOS</span>
+              <h2 id="count-pedidos">0</h2>
+            </div>
+            <i data-lucide="shopping-cart"></i>
+          </div>
+          <div
+            class="card-pro v-claro"
+            id="card-correos-toggle"
+            style="cursor: pointer"
+          >
+            <div class="card-data">
+              <span>CORREOS</span>
+              <h2 id="count-correos">0</h2>
+            </div>
+            <i data-lucide="mail"></i>
+          </div>
+        </section>
 
-        <main class="Content">
-            <header class="main-header">
-                <h1 id="user-title">Bienvenido, Admin</h1>
-                <p>Gestión y estadísticas de tu tienda de vinos</p>
-            </header>
+        <section
+          id="seccion-usuarios"
+          class="details-grid dashboard-toggle-section"
+        >
+          <div class="card-pro-large full-width-grid">
+            <div class="card-header">
+              <div class="header-title">
+                <i data-lucide="users" class="icon-vinotinto-header"></i>
+                <h3>Lista de Usuarios</h3>
+              </div>
+              <span class="badge" id="count-usuarios-lista">0 usuarios</span>
+            </div>
+            <div class="inbox-container">
+              <div class="inbox-list full-width-list" id="lista-usuarios">
+                <p class="loading">Cargando usuarios...</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <section class="cards-grid">
-                <div class="card-pro v-vino">
-                    <div class="card-data">
-                        <span>USUARIOS</span>
-                        <h2 id="count-usuarios">0</h2>
-                    </div>
-                    <i data-lucide="users"></i>
-                </div>
-                <div class="card-pro v-uva">
-                    <div class="card-data">
-                        <span>PRODUCTOS</span>
-                        <h2 id="count-productos">0</h2>
-                    </div>
-                    <i data-lucide="package"></i>
-                </div>
-                <div class="card-pro v-rosado">
-                    <div class="card-data">
-                        <span>PEDIDOS</span>
-                        <h2 id="count-pedidos">0</h2>
-                    </div>
-                    <i data-lucide="shopping-cart"></i>
-                </div>
-                <div class="card-pro v-claro" id="card-correos-toggle" style="cursor: pointer">
-                    <div class="card-data">
-                        <span>CORREOS</span>
-                        <h2 id="count-correos">0</h2>
-                    </div>
-                    <i data-lucide="mail"></i>
-                </div>
-            </section>
+        <section
+          id="seccion-mensajes"
+          class="details-grid dashboard-toggle-section"
+        >
+          <div class="card-pro-large full-width-grid">
+            <div class="card-header">
+              <div class="header-title">
+                <i data-lucide="mail" class="icon-vinotinto-header"></i>
+                <h3>Bandeja de Entrada</h3>
+              </div>
+              <span class="badge" id="total-mensajes">0 nuevos</span>
+            </div>
+            <div class="inbox-container">
+              <div class="inbox-list full-width-list" id="lista-mensajes">
+                <p class="loading">Cargando mensajes...</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <section id="seccion-mensajes" class="details-grid" style="display: none; margin-bottom: 30px;">
-                <div class="card-pro-large" style="grid-column: 1 / -1;">
-                    <div class="card-header">
-                        <div class="header-title">
-                            <i data-lucide="mail" style="color: #722f37;"></i>
-                            <h3>Bandeja de Entrada</h3>
-                        </div>
-                        <span class="badge" id="total-mensajes">0 nuevos</span>
-                    </div>
-                    <div class="inbox-container">
-                        <div class="inbox-list" id="lista-mensajes" style="width: 100%;">
-                            <p class="loading">Cargando mensajes...</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="details-grid">
-                <div class="card-pro-large">
-                    <div class="card-header">
-                        <h3>Estadísticas de Ventas</h3>
-                        <i data-lucide="trending-up"></i>
-                    </div>
-                    <div class="placeholder-content">
-                        <p id="stats-info">Análisis de ventas mensuales...</p>
-                    </div>
-                </div>
-                <div class="card-pro-large">
-                    <div class="card-header">
-                        <h3>Actividad Reciente</h3>
-                        <i data-lucide="clock"></i>
-                    </div>
-                    <div class="placeholder-content">
-                        <p id="recent-activity">Últimos movimientos del sistema...</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+        <section class="details-grid">
+          <div class="card-pro-large">
+            <div class="card-header">
+              <h3>Estadísticas de Ventas</h3>
+              <i data-lucide="trending-up"></i>
+            </div>
+            <div class="placeholder-content">
+              <p id="stats-info">Análisis de ventas mensuales...</p>
+            </div>
+          </div>
+          <div class="card-pro-large">
+            <div class="card-header">
+              <h3>Actividad Reciente</h3>
+              <i data-lucide="clock"></i>
+            </div>
+            <div class="placeholder-content">
+              <p id="recent-activity">Últimos movimientos del sistema...</p>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
 
     <div id="modal-mensaje" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div id="detalle-modal-body">
-                </div>
+      <div class="modal-content">
+        <div class="modal-header-vinotinto">
+          <span class="close-modal">&times;</span>
         </div>
+        <div id="detalle-modal-body" class="modal-body-padding"></div>
+      </div>
+    </div>
+
+    <div id="modal-usuario" class="modal">
+      <div class="modal-content">
+        <div class="modal-header-vinotinto">
+          <span id="close-modal-usuario" class="close-modal">&times;</span>
+        </div>
+        <div id="detalle-modal-usuario-body" class="modal-body-padding"></div>
+      </div>
+    </div>
+
+    <div id="modal-confirmar-eliminar" class="modal">
+      <div class="modal-content modal-confirm-box">
+        <div class="modal-header-vinotinto">
+          <span id="btn-cancelar-x" class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body-padding text-center">
+          <h3>¿Eliminar mensaje?</h3>
+          <p>
+            Esta acción no se puede deshacer. El mensaje se borrará
+            permanentemente.
+          </p>
+          <div class="modal-confirm-buttons">
+            <button id="btn-cancelar-eliminar" class="btn-cancelar">
+              Cancelar
+            </button>
+            <button id="btn-confirmar-eliminar" class="btn-confirmar">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-confirmar-eliminar-usuario" class="modal">
+      <div class="modal-content modal-confirm-box">
+        <div class="modal-header-vinotinto">
+          <span id="btn-cancelar-user-x" class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body-padding text-center">
+          <h3>¿Eliminar usuario?</h3>
+          <p>
+            Esta acción no se puede deshacer. El usuario se borrará
+            permanentemente de la base de datos.
+          </p>
+          <div class="modal-confirm-buttons">
+            <button id="btn-cancelar-eliminar-usuario" class="btn-cancelar">
+              Cancelar
+            </button>
+            <button id="btn-confirmar-eliminar-usuario" class="btn-confirmar">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        lucide.createIcons();
+      lucide.createIcons();
     </script>
     <script type="module" src="JS/firebase-config.js"></script>
     <script type="module" src="JS/admin.js"></script>
-</body>
+  </body>
 </html>
