@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabores del vino</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="index.html" />
+    <link rel="stylesheet" href="Contacto.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png"
+    />
+  </head>
+  <body class="Inicio">
+    <header class="Header">
+      <div class="container nav">
+        <div class="imglogo">
+          <img
+            src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png"
+            alt="Abuela"
+            width="60px"
+            height="60px"
+          />
+        </div>
+        <div class="logo">Sabores del vino</div>
+        <nav>
+          <a href="Registro.html">Registrarse</a>
+          <a href="Iniciarseccion.html" class="btn-login">Iniciar sesión</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="I">
+      <div class="header">
+        <img
+          src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png"
+          alt="Logo Sabores del Vino"
+          width="250px"
+        />
+      </div>
+
+      <div class="form-body">
+        <h1>Inicia Sesión</h1>
+        <form id="loginForm">
+          <label>Correo Electrónico</label>
+          <input
+            type="email"
+            id="emailLogin"
+            placeholder="Correo Electrónico"
+            required
+          /><br />
+
+          <label>Contraseña</label>
+          <input
+            type="password"
+            id="passLogin"
+            placeholder="Contraseña"
+            required
+          />
+
+          <div class="Check">
+            <label class="checkbox">
+              <input type="checkbox" /> Recordarme
+            </label>
+
+            <a href="#">¿Olvidó su contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn-entrar">ENTRAR</button>
+        </form>
+        <div class="divisor">O</div>
+
+        <button class="btn-social" id="googleLogin">Inicia Sesión con Google</button>
+        <button class="btn-social">Inicia Sesión con Facebook</button>
+
+        <p>¿No tienes cuenta? <a href="Registro.html">Regístrate aquí.</a></p>
+      </div>
+    </section>
+    <script type="module" src="JS/login.js"></script>
+        
+  </body>
+</html>

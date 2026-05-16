@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="index.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <title>Sabores del vino</title>
+    <link rel="icon" type="image/x-icon" href="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png">
+  </head>
+  <body>
+    <header class="Header">
+      <div class="container nav">
+                <div class="imglogo"><img src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" alt="Abuela" width="60px" height="60px"></div>
+        <div class="logo">Sabores del vino</div>
+        <nav>
+          <a href="index.html">Inicio</a>
+          <a href="#Menu">Menú</a>
+          <a href="#galeria">Galeria Imagen</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="Iniciarseccion.html" class="btn-login">Iniciar sesión</a>
+        </nav>
+      </div>
+    </header>
+    <section class="contacto container" id="contacto">
+      <h2>Contáctanos</h2>
+
+      <p>Déjanos tu mensaje y te responderemos pronto</p>
+
+      <form class="formulario">
+        <div class="fila">
+          <div class="campo">
+            <label for="nombre">Nombre *</label>
+
+            <input type="text" id="nombre" placeholder="Tu nombre" />
+          </div>
+
+          <div class="campo">
+            <label for="apellido">Apellido *</label>
+
+            <input type="text" id="apellido" placeholder="Tu apellido" />
+          </div>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="celular">Celular (opcional)</label>
+
+            <input type="tel" id="celular" placeholder="Ej: 3001234567" />
+          </div>
+
+          <div class="campo">
+            <label for="email">Email *</label>
+
+            <input type="email" id="email" placeholder="correo@email.com" />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Mensaje *</label>
+
+          <textarea
+            id="mensaje"
+            rows="5"
+            placeholder="Escribe tu mensaje..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar">Enviar mensaje</button>
+      </form>
+    </section>
+
+<section class="tabs-section">
+
+  <input type="radio" name="tabs" id="tab1" checked hidden>
+  <input type="radio" name="tabs" id="tab2" hidden>
+  <input type="radio" name="tabs" id="tab3" hidden>
+
+  <div class="tabs">
+    <label class="tab-btn" for="tab1">Información</label>
+    <label class="tab-btn" for="tab2">Datos</label>
+    <label class="tab-btn" for="tab3">Contacto</label>
+  </div>
+
+  <div class="tab-content" id="tab1-content">
+    <h2>Información</h2>
+    <p>Contenido moderno con animación suave.</p>
+  </div>
+
+  <div class="tab-content" id="tab2-content">
+    <h2>Datos</h2>
+    <p>Aquí puedes mostrar estadísticas o información.</p>
+  </div>
+
+  <div class="tab-content" id="tab3-content">
+    <h2>Contacto</h2>
+    <p>Formulario o datos de contacto.</p>
+  </div>
+
+</section>
+
+    <footer class="footer">
+      <div class="footer-content container">
+        <div class="footer-col">
+          <h3>La abuela</h3>
+          <p>Sabores que enamoran</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Enlaces</h4>
+          <a href="index.html">Inicio</a>
+          <a href="index.html#Menu">Menú</a>
+          <a href="index.html#galeria">Galeria Imagen</a>
+          <a href="Contacto.html">Contacto</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <p>Medellín</p>
+          <p>Cra 789</p>
+          <p>Tel: 33615566541423</p>
+          <p>Email: contacto@laabuela.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 La Abuela — Todos los derechos reservados</p>
+      </div>
+    </footer>
+<script type="module" src="JS/firebase-config.js"></script>
+<script type="module" src="JS/contacto.js"></script>
+        
+  </body>
+</html>

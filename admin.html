@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" />
+    <title>Sabores del Vino - Dashboard Admin</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <img src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" alt="Logo" style="width: 40px; height: auto" />
+                </div>
+                <span>Sabores del vino</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="active">
+                        <span class="icon-box"><i data-lucide="home"></i></span>
+                        <span>Inicio</span>
+                    </li>
+                    <li>
+                        <span class="icon-box"><i data-lucide="layers"></i></span>
+                        <span>Contenido</span>
+                    </li>
+                    <li>
+                        <span class="icon-box"><i data-lucide="users"></i></span>
+                        <span>Usuarios</span>
+                    </li>
+                    <li>
+                        <span class="icon-box"><i data-lucide="bar-chart-2"></i></span>
+                        <span>Analíticas</span>
+                    </li>
+                    <li id="sidebar-btn-mensajes" style="cursor: pointer">
+                        <span class="icon-box"><i data-lucide="mail"></i></span>
+                        <span>Mensajes</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <span class="name" id="sidebar-nombre">Cargando...</span>
+                    <span class="role">Administrador</span>
+                </div>
+                <button class="btn-logout" id="btn-logout">
+                    <i data-lucide="log-out"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="Content">
+            <header class="main-header">
+                <h1 id="user-title">Bienvenido, Admin</h1>
+                <p>Gestión y estadísticas de tu tienda de vinos</p>
+            </header>
+
+            <section class="cards-grid">
+                <div class="card-pro v-vino">
+                    <div class="card-data">
+                        <span>USUARIOS</span>
+                        <h2 id="count-usuarios">0</h2>
+                    </div>
+                    <i data-lucide="users"></i>
+                </div>
+                <div class="card-pro v-uva">
+                    <div class="card-data">
+                        <span>PRODUCTOS</span>
+                        <h2 id="count-productos">0</h2>
+                    </div>
+                    <i data-lucide="package"></i>
+                </div>
+                <div class="card-pro v-rosado">
+                    <div class="card-data">
+                        <span>PEDIDOS</span>
+                        <h2 id="count-pedidos">0</h2>
+                    </div>
+                    <i data-lucide="shopping-cart"></i>
+                </div>
+                <div class="card-pro v-claro" id="card-correos-toggle" style="cursor: pointer">
+                    <div class="card-data">
+                        <span>CORREOS</span>
+                        <h2 id="count-correos">0</h2>
+                    </div>
+                    <i data-lucide="mail"></i>
+                </div>
+            </section>
+
+            <section id="seccion-mensajes" class="details-grid" style="display: none; margin-bottom: 30px;">
+                <div class="card-pro-large" style="grid-column: 1 / -1;">
+                    <div class="card-header">
+                        <div class="header-title">
+                            <i data-lucide="mail" style="color: #722f37;"></i>
+                            <h3>Bandeja de Entrada</h3>
+                        </div>
+                        <span class="badge" id="total-mensajes">0 nuevos</span>
+                    </div>
+                    <div class="inbox-container">
+                        <div class="inbox-list" id="lista-mensajes" style="width: 100%;">
+                            <p class="loading">Cargando mensajes...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="details-grid">
+                <div class="card-pro-large">
+                    <div class="card-header">
+                        <h3>Estadísticas de Ventas</h3>
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <div class="placeholder-content">
+                        <p id="stats-info">Análisis de ventas mensuales...</p>
+                    </div>
+                </div>
+                <div class="card-pro-large">
+                    <div class="card-header">
+                        <h3>Actividad Reciente</h3>
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <div class="placeholder-content">
+                        <p id="recent-activity">Últimos movimientos del sistema...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-mensaje" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="detalle-modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script type="module" src="JS/firebase-config.js"></script>
+    <script type="module" src="JS/admin.js"></script>
+</body>
+</html>
