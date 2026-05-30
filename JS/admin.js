@@ -12,17 +12,20 @@ let idMensajeAEliminar = null;
 let idUsuarioAEliminar = null;
 
 async function cargarMetricas() {
-  try {
-    const snapUsers = await getDocs(collection(db, "usuarios"));
-    const snapMensajes = await getDocs(collection(db, "mensajes"));
+    try {
+        const snapUsers = await getDocs(collection(db, "usuarios"));
+        const snapMensajes = await getDocs(collection(db, "mensajes"));
+        const snapPlatos = await getDocs(collection(db, "pedidos"));
 
-    if (document.getElementById("count-usuarios"))
-      document.getElementById("count-usuarios").textContent = snapUsers.size;
-    if (document.getElementById("count-correos"))
-      document.getElementById("count-correos").textContent = snapMensajes.size;
-  } catch (e) {
-    console.error(e);
-  }
+        if (document.getElementById("count-usuarios"))
+            document.getElementById("count-usuarios").textContent = snapUsers.size;
+        if (document.getElementById("count-correos"))
+            document.getElementById("count-correos").textContent = snapMensajes.size;
+        if (document.getElementById("count-platos"))
+            document.getElementById("count-platos").textContent = snapPlatos.size;
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 async function cargarBandeja() {
@@ -309,6 +312,114 @@ function configurarModalEliminar() {
   }
 }
 
+let idPlatoAEliminar = null;
+
+async function cargarPlatos() {
+    const lista = document.getElementById("lista-platos");
+    const contador = document.getElementById("count-platos-lista");
+    if (!lista) return;
+
+    try {
+        const q = query(collection(db, "pedidos"), orderBy("fecha", "desc"));
+        const snapshot = await getDocs(q);
+        lista.innerHTML = "";
+
+        if (contador) contador.textContent = `${snapshot.size} platos`;
+
+        if (snapshot.empty) {
+            lista.innerHTML = "<p class='inbox-empty-text'>No hay platos creados.</p>";
+            return;
+        }
+
+        snapshot.forEach((documento) => {
+            const p = documento.data();
+            const idDoc = documento.id;
+
+            const div = document.createElement("div");
+            div.className = "inbox-item";
+
+            const fecha = p.fecha ? new Date(p.fecha.seconds * 1000).toLocaleString() : "Reciente";
+            const ingredientes = p.items ? p.items.map(i => i.name).join(", ") : "Sin ingredientes";
+
+            div.innerHTML = `
+                <div class="inbox-item-row">
+                    <div class="inbox-item-content">
+                        <h4>${p.nombrePlato || "Plato sin nombre"}</h4>
+                        <p><strong>Total:</strong> $${p.total?.toLocaleString() || 0} COP | <strong>Fecha:</strong> ${fecha}</p>
+                        <p><strong>Ingredientes:</strong> ${ingredientes}</p>
+                    </div>
+                    <button class="btn-delete-msg" data-id="${idDoc}">
+                        <i data-lucide="trash-2"></i>
+                    </button>
+                </div>
+            `;
+
+            div.onclick = (e) => {
+                e.stopPropagation();
+                abrirModalPlato(p);
+            };
+
+            const btnBorrar = div.querySelector(".btn-delete-msg");
+            if (btnBorrar) {
+                btnBorrar.onclick = (e) => {
+                    e.stopPropagation();
+                    idPlatoAEliminar = idDoc;
+                    abrirModalConfirmacionPlato();
+                };
+            }
+
+            lista.appendChild(div);
+        });
+
+        lucide.createIcons();
+    } catch (e) {
+        console.error("Error al cargar platos:", e);
+    }
+}
+
+function abrirModalPlato(p) {
+    const modal = document.getElementById("modal-mensaje");
+    const body = document.getElementById("detalle-modal-body");
+    const fecha = p.fecha ? new Date(p.fecha.seconds * 1000).toLocaleString() : "Reciente";
+    const ingredientes = p.items ? p.items.map(i => `<li>${i.name} — $${i.price?.toLocaleString()} COP</li>`).join("") : "";
+
+    if (body) {
+        body.innerHTML = `
+            <h2 class="modal-detail-title">${p.nombrePlato || "Plato sin nombre"}</h2>
+            <p class="modal-detail-info"><strong>Fecha:</strong> ${fecha}</p>
+            <p class="modal-detail-info"><strong>Total:</strong> $${p.total?.toLocaleString() || 0} COP</p>
+            <p class="modal-detail-info"><strong>Descripción:</strong> ${p.descripcion || "Sin descripción"}</p>
+            <p class="modal-detail-info"><strong>Ingredientes:</strong></p>
+            <ul style="margin-left:20px; font-size:14px;">${ingredientes}</ul>
+        `;
+    }
+    if (modal) modal.classList.add("is-visible");
+}
+
+function abrirModalConfirmacionPlato() {
+    const modalConfirm = document.getElementById("modal-confirmar-eliminar-plato");
+    if (modalConfirm) modalConfirm.classList.add("is-visible");
+}
+
+function togglePlatos() {
+    const sec = document.getElementById("seccion-platos");
+    const secMensajes = document.getElementById("seccion-mensajes");
+    const secUsuarios = document.getElementById("seccion-usuarios");
+
+    if (secMensajes) secMensajes.classList.remove("is-visible");
+    if (secUsuarios) secUsuarios.classList.remove("is-visible");
+
+    if (sec) {
+        const estaVisible = sec.classList.contains("is-visible");
+        if (estaVisible) {
+            sec.classList.remove("is-visible");
+        } else {
+            sec.classList.add("is-visible");
+            cargarPlatos();
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   cargarMetricas();
   configurarCierreModal();
@@ -366,6 +477,34 @@ itemsNavegacion.forEach(item => {
 });
 
 
+    document.getElementById("sidebar-btn-platos")?.addEventListener("click", togglePlatos);
+document.getElementById("card-platos-toggle")?.addEventListener("click", togglePlatos);
+
+const btnCancelarPlato = document.getElementById("btn-cancelar-eliminar-plato");
+const btnConfirmarPlato = document.getElementById("btn-confirmar-eliminar-plato");
+
+if (btnCancelarPlato) {
+    btnCancelarPlato.onclick = () => {
+        document.getElementById("modal-confirmar-eliminar-plato")?.classList.remove("is-visible");
+        idPlatoAEliminar = null;
+    };
+}
+
+if (btnConfirmarPlato) {
+    btnConfirmarPlato.onclick = async () => {
+        if (idPlatoAEliminar) {
+            try {
+                await deleteDoc(doc(db, "pedidos", idPlatoAEliminar));
+                document.getElementById("modal-confirmar-eliminar-plato")?.classList.remove("is-visible");
+                idPlatoAEliminar = null;
+                cargarPlatos();
+                cargarMetricas();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    };
+}
     const tarjetaMensajes = tarjetasDato[3];
     tarjetaMensajes.style.cursor = "pointer";
     tarjetaMensajes.onclick = (e) => {

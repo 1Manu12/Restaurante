@@ -48,6 +48,11 @@
               <span class="icon-box"><i data-lucide="mail"></i></span>
               <span>Mensajes</span>
             </li>
+
+            <li id="sidebar-btn-platos" style="cursor: pointer">
+              <span class="icon-box"><i data-lucide="utensils"></i></span>
+              <span>Platos</span>
+            </li>
           </ul>
         </nav>
 
@@ -101,6 +106,18 @@
             </div>
             <i data-lucide="mail"></i>
           </div>
+
+          <div
+            class="card-pro v-rosado"
+            id="card-platos-toggle"
+            style="cursor: pointer"
+          >
+            <div class="card-data">
+              <span>PLATOS</span>
+              <h2 id="count-platos">0</h2>
+            </div>
+            <i data-lucide="utensils"></i>
+          </div>
         </section>
 
         <section
@@ -138,6 +155,26 @@
             <div class="inbox-container">
               <div class="inbox-list full-width-list" id="lista-mensajes">
                 <p class="loading">Cargando mensajes...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="seccion-platos"
+          class="details-grid dashboard-toggle-section"
+        >
+          <div class="card-pro-large full-width-grid">
+            <div class="card-header">
+              <div class="header-title">
+                <i data-lucide="utensils" class="icon-vinotinto-header"></i>
+                <h3>Platos Creados</h3>
+              </div>
+              <span class="badge" id="count-platos-lista">0 platos</span>
+            </div>
+            <div class="inbox-container">
+              <div class="inbox-list full-width-list" id="lista-platos">
+                <p class="loading">Cargando platos...</p>
               </div>
             </div>
           </div>
@@ -229,6 +266,22 @@
         </div>
       </div>
     </div>
+
+    <div id="modal-confirmar-eliminar-plato" class="modal">
+    <div class="modal-content modal-confirm-box">
+        <div class="modal-header-vinotinto">
+            <span id="btn-cancelar-plato-x" class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body-padding text-center">
+            <h3>¿Eliminar plato?</h3>
+            <p>Esta acción no se puede deshacer.</p>
+            <div class="modal-confirm-buttons">
+                <button id="btn-cancelar-eliminar-plato" class="btn-cancelar">Cancelar</button>
+                <button id="btn-confirmar-eliminar-plato" class="btn-confirmar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script>
       lucide.createIcons();
