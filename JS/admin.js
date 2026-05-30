@@ -353,6 +353,19 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleUsuarios();
     };
 
+    const itemsNavegacion = document.querySelectorAll('li');
+itemsNavegacion.forEach(item => {
+    const textoConEnlace = item.querySelector('span[href]');
+    if (textoConEnlace) {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => {
+            const url = textoConEnlace.getAttribute('href');
+            if (url) window.location.href = url;
+        });
+    }
+});
+
+
     const tarjetaMensajes = tarjetasDato[3];
     tarjetaMensajes.style.cursor = "pointer";
     tarjetaMensajes.onclick = (e) => {

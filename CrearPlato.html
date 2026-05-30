@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" />
+    <title>Sabores del Vino - Dashboard Admin</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <img src="img/Gemini_Generated_Image_xxuqwjxxuqwjxxuq-removebg-preview.png" alt="Logo" style="width: 40px; height: auto" />
+            </div>
+            <span>Sabores del vino</span>
+        </div>
+
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="active">
+                    <span class="icon-box"><i data-lucide="home"></i></span>
+                    <span href="admin.html">Inicio</span>
+                </li>
+                <li class="active">
+                    <span class="icon-box"><i data-lucide="layers"></i></span>
+                    <span href="CrearPlato.html">Contenido</span>
+                </li>
+                <li id="sidebar-btn-usuarios" style="cursor: pointer">
+                    <span class="icon-box"><i data-lucide="users"></i></span>
+                    <span href="admin.html">Usuarios</span>
+                </li>
+                <li>
+                    <span class="icon-box"><i data-lucide="bar-chart-2"></i></span>
+                    <span href="admin.html">Analíticas</span>
+                </li>
+                <li id="sidebar-btn-mensajes" style="cursor: pointer">
+                    <span class="icon-box"><i data-lucide="mail"></i></span>
+                    <span href="admin.html">Mensajes</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <span class="name" id="sidebar-nombre">Cerrar sección</span>
+                <span class="role">Administrador</span>
+            </div>
+            <button class="btn-logout" id="btn-logout">
+                <i data-lucide="log-out"></i>
+            </button>
+        </div>
+    </aside>
+
+    <section class="plato">
+        <header class="salad-header">
+            <h1>CREA TU PLATO PARA INSERTARLO A TU RESTAURANTE</h1>
+            <p>Arrastra los ingredientes frescos directamente al bol para diseñar tu plato ideal.</p>
+        </header>
+
+        <div class="salad-container">
+
+            <div class="salad-preview-panel" id="bowl-dropzone">
+                <h2>TU CREACIÓN PERSONALIZADA</h2>
+
+                <div class="salad-visualization">
+                    <div class="bowl-wrapper">
+                        <img src="img/plato.png" alt="Bol de Ensalada" class="bowl-image" id="bowl-img-target">
+                        <div class="drop-overlay-msg">¡Suelta el ingrediente aquí!</div>
+
+                        <img id="layer-tomate" class="salad-layer" src="img/imagen_2026-05-29_184519206-removebg-preview.png" alt="Tomate">
+                        <img id="layer-aguacate" class="salad-layer" src="img/imagen_2026-05-29_183750276-removebg-preview.png" alt="Aguacate">
+                        <img id="layer-pepino" class="salad-layer" src="img/imagen_2026-05-29_184544539-removebg-preview.png" alt="Pepino">
+                        <img id="layer-brocoli" class="salad-layer" src="img/imagen_2026-05-29_184641796-removebg-preview.png" alt="Brócoli">
+                        <img id="layer-maiz" class="salad-layer" src="img/imagen_2026-05-29_184744893-removebg-preview.png" alt="Maíz">
+                        <img id="layer-espinaca" class="salad-layer" src="img/Espinaca.png" alt="Espinaca">
+                    </div>
+
+                    <div class="salad-layers-menu">
+                        <div class="layer-item active">
+                            <img src="img/imagen_2026-05-29_201248259-removebg-preview.png" alt="Lechugas">
+                            <span>Lechugas</span>
+                        </div>
+                        <div class="layer-item">
+                            <img src="img/imagen_2026-05-29_201311155-removebg-preview.png" alt="Proteínas">
+                            <span>Proteínas</span>
+                        </div>
+                        <div class="layer-item">
+                            <img src="img/imagen_2026-05-29_201415237-removebg-preview.png" alt="Vegetales 1">
+                            <span>Vegetales</span>
+                        </div>
+                        <div class="layer-item">
+                            <img src="img/imagen_2026-05-29_201906452-removebg-preview.png" alt="Vegetales 2">
+                            <span>Frutas</span>
+                        </div>
+                        <div class="layer-item">
+                            <img src="img/imagen_2026-05-29_201500103-removebg-preview.png" alt="Aderesos">
+                            <span>Aderesos</span>
+                        </div>
+                        <div class="layer-item">
+                            <img src="img/imagen_2026-05-29_201615589-removebg-preview.png" alt="Croutons">
+                            <span>Crutones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bowl-tag">BOL DE PLATO CREATIVO</div>
+            </div>
+
+            <div class="salad-config-panel">
+                <div class="config-section">
+                    <h3 class="config-title">DETALLES DEL PLATO</h3>
+
+                    <div class="form-group">
+                        <label>Nombre del Plato</label>
+                        <input type="text" value="Ensalada Arcoiris Especial">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea rows="3">Una deliciosa y fresca ensalada con base de quinoa, mezcla de lechugas, pollo asado, vegetales frescos y aderezo casero.</textarea>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3 class="config-title highlight">PASO 2: AGREGA TUS VEGETALES & INGREDIENTES</h3>
+
+                    <div class="search-bar">
+                        <i data-lucide="search"></i>
+                        <input type="text" placeholder="Buscar ingrediente...">
+                    </div>
+
+                    <div class="ingredients-grid">
+                        <div class="ingredient-card" draggable="true" data-id="tomate" data-name="Tomates Cherry" data-price="1500" data-cat="Bases">
+                            <button class="btn-add-ingredient">+</button>
+                            <img src="img/imagen_2026-05-29_184519206-removebg-preview.png" alt="Tomates Cherry">
+                            <span class="ing-name">Tomates Cherry</span>
+                        </div>
+                        <div class="ingredient-card" draggable="true" data-id="aguacate" data-name="Aguacate" data-price="2000" data-cat="Proteínas">
+                            <button class="btn-add-ingredient">+</button>
+                            <img src="img/imagen_2026-05-29_183750276-removebg-preview.png" alt="Aguacate">
+                            <span class="ing-name">Aguacate</span>
+                        </div>
+                        <div class="ingredient-card" draggable="true" data-id="pepino" data-name="Pepino" data-price="0" data-cat="Vegetales">
+                            <button class="btn-add-ingredient">+</button>
+                            <img src="img/imagen_2026-05-29_184544539-removebg-preview.png" alt="Pepino">
+                            <span class="ing-name">Pepino</span>
+                        </div>
+                        <div class="ingredient-card" draggable="true" data-id="brocoli" data-name="Brócoli" data-price="2000" data-cat="Vegetales 2">
+                            <button class="btn-add-ingredient">+</button>
+                            <img src="img/imagen_2026-05-29_184641796-removebg-preview.png" alt="Brócoli">
+                            <span class="ing-name">Brócoli</span>
+                        </div>
+                        <div class="ingredient-card" draggable="true" data-id="maiz" data-name="Maíz" data-price="1500" data-cat="Dresesos">
+                            <button class="btn-add-ingredient">+</button>
+                            <img src="img/imagen_2026-05-29_184744893-removebg-preview.png" alt="Maíz">
+                            <span class="ing-name">Maíz</span>
+                        </div>
+                        <div class="ingredient-card" draggable="true" data-id="espinaca" data-name="Espinaca" data-price="1200" data-cat="Vegetales">
+                            <button class="btn-add-ingredient">+</button>
+                            <img src="img/Espinaca.png" alt="Espinaca">
+                            <span class="ing-name">Espinaca</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="salad-summary-panel">
+                <h3 class="summary-title">RESUMEN DE TU PEDIDO</h3>
+
+                <div class="summary-list" id="summary-dynamic-list">
+                    <div class="summary-placeholder">Arrastra un ingrediente al bol para comenzar.</div>
+                </div>
+
+                <div class="total-order-box">
+                    <div class="subtotal-final">Subtotal: <span id="txt-subtotal">$0 COP</span></div>
+                    <div class="total-final">Total: <span id="txt-total">$0 COP</span></div>
+                    <button class="btn-submit-order">
+                        CREAR PLATO PERFECTO Y AGREGAR AL CARRITO
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+    <script type="module" src="JS/plato.js"></script>
+</body>
+</html>

@@ -11,14 +11,13 @@ import {
   getDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-console.log("Script cargó correctamente"); /* ← después de los imports */
+console.log("Script cargó correctamente");
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     const docRef = doc(db, "usuarios", user.uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists() && docSnap.data().admin === true) {
-      // 1. Verificamos que el elemento exista antes de usar textContent
       const sidebarNombre = document.getElementById("sidebar-nombre");
       if (sidebarNombre) {
         sidebarNombre.textContent = user.displayName || user.email;
